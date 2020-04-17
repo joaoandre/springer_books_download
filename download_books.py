@@ -27,6 +27,6 @@ for i, book in df.iterrows():
     f = requests.get(url)
     file_name = ""
     for c in book['Book Title']:
-        print(f'{file_name}')
         file_name += '_' if c in invalid_chars else c
+        
     open(f"{file_name}.pdf", "wb").write(f.content)
