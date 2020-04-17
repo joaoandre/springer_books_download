@@ -13,6 +13,8 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+invalid_chars = '<>:"/\|?*'.split()
+
 
 session = requests.Session()
 df = pd.read_csv("books.csv")
@@ -23,4 +25,8 @@ for i, book in df.iterrows():
     print(f"Downloading {book['Book Title']} by {book['Author']} on URL {url}")
     print("-------------------------------------------------------------------")
     f = requests.get(url)
-    open(f"{book['Book Title']}.pdf", "wb").write(f.content)
+    file_name = ""
+    for c in book['Book Title']:
+        file_name += '_' if c in invalid_chars else c
+        
+    open(f"{file_name}.pdf", "wb").write(f.content)
