@@ -17,7 +17,7 @@ class bcolors:
 session = requests.Session()
 df = pd.read_csv("books.csv")
 
-for i, book in df.head().iterrows():
+for i, book in df.iterrows():
     urlObject = urlparse(book['DOI URL'])
     url = f"https://link.springer.com/content/pdf/{urlObject.path}.pdf"
     print(f"Downloading {book['Book Title']} by {book['Author']} on URL {url}")
