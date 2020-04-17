@@ -15,14 +15,12 @@ class bcolors:
 
 
 session = requests.Session()
-# http: // doi.org/10.1007/978-0-387-21736-9	http: // link.springer.com/openurl?genre = book & isbn = 978-0-387-21736-9
 df = pd.read_csv("books.csv")
 
 for i, book in df.head().iterrows():
     urlObject = urlparse(book['DOI URL'])
     url = f"https://link.springer.com/content/pdf/{urlObject.path}.pdf"
-    print(
-        f"Downloading {book['Book Title']} by {book['Author']} on URL {url}")
+    print(f"Downloading {book['Book Title']} by {book['Author']} on URL {url}")
     print("-------------------------------------------------------------------")
     f = requests.get(url)
     open(f"{book['Book Title']}.pdf", "wb").write(f.content)
